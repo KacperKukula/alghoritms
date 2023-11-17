@@ -1,0 +1,26 @@
+:root  {
+    font-size: 18px;
+
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    color: #f0f0f0;
+
+    --primary-accent: rgb(174, 38, 224);
+}
+
+html, body {
+    min-height: 100dvh;
+}
+
+html {
+    scroll-behavior: smooth;
+    background: #202020; 
+}
+
+body {
+    background: #536976;
+    background: -webkit-linear-gradient(to right, #292E49, #536976);
+    background: linear-gradient(to right, #292E49, #536976);
+}
