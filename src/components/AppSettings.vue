@@ -3,10 +3,8 @@
       <!--SHOW POINTS-->
       <h2>Dostępne punkty:</h2>
       <div class="pointCard_container">
-        <v-card v-for="point in modelValue" :key="point.id" variant="tonal" class="pointCard" :class="point.isEntryPoint ? 'entryPoint' : ''"
-          @click="changeEntryPoint(point)">
-          <p>{{ "Nazwa: " + point.name }}</p>
-          <p>{{ "X: " + point.x + ", Y: " + point.y }}</p>
+        <v-card v-for="point in modelValue" :key="point.id" variant="tonal">
+          <point-tale :point="point" />
         </v-card>
       </div>
 
@@ -25,15 +23,17 @@
       </v-row>
 
       <!--RUN-->
-      <v-btn class="mt-10" color="white" @click="run()" outlined>{{ started ? 'RUN!' : 'NEXT STEP' }}</v-btn>
+      <div class="settingCard_nextBtn" @click="run()">{{ animationStarted ? 'RUN!' : 'NEXT STEP' }}</div>
     </div>
 </template>
   
 <script>
 import Point from '../models/Point.ts';
+import PointTale from './PointTale.vue';
 import { ref } from 'vue';
 
 export default {
+  name: 'AppSettings',
   props: {
     modelValue: {
       type: Array,
@@ -42,7 +42,9 @@ export default {
       type: Boolean,
     },
   },
-  name: 'AppSettings',
+  components: {
+    PointTale,
+  },
   setup(props, { emit }) {
     const newPoint = ref(new Point('', 0, 0));
     let nextMove = '';
@@ -53,12 +55,10 @@ export default {
     };
 
     const run = () => { emit('run'); };
-    const changeEntryPoint = (point) => { emit('change-entry-point', point); };
 
     return {
       newPoint,
       appendPoint,
-      changeEntryPoint,
       run
     }
   }
@@ -75,13 +75,6 @@ h2 {
   font-size: 1.2rem;
   padding-bottom: 1rem;
 }
-.pointCard {
-  padding: 0.6rem 1rem;
-  border: 2px solid rgba(42, 42, 42, 0.6);
-  border-radius: .6rem;
-  background-color: rgba(27, 27, 27, 0.6);
-  max-width: 15rem;
-}
 .pointCard.entryPoint {
   cursor: pointer;
   background-color: rgb(36, 36, 41);
@@ -92,4 +85,19 @@ h2 {
   grid-template-columns: 1fr 1fr;
   gap: .4rem;
 }
+.settingCard_nextBtn {
+  margin-top: 1.8rem;
+  cursor: pointer;
+  border-top: 2px solid rgba(183, 183, 183, 0.6);
+  padding: 12px 0 4px;
+  width: 100%;
+  text-align: center;
+  transition: all .15s ease-in-out;
+  border-radius: 0 0 2rem 2rem;
+}
+.settingCard_nextBtn:hover {
+  background-color: rgba(198, 198, 207, 0.3);
+}
+
+
 </style>

@@ -61,7 +61,7 @@ export default {
 <style scoped>
 .graphContainer {
     width: 100%;
-    height: 80vh;
+    height: 75vh;
     overflow: visible;
 }
 </style>

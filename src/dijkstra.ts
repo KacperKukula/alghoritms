@@ -11,7 +11,7 @@ import { Ref } from 'vue';
  * @param logger        - reference to logger array
  * @returns             - next point (no reference)
  */
-export function dijstraNextStep(pointsArray: Ref<Point[]>, currentPoint: Point, linesArray: Ref<Line[]>, logger: Ref<string[]>) {
+export function dijstraNextStep(pointsArray: Ref<Point[]>, currentPoint: Point, linesArray: Ref<Line[]>, logger: Ref<string[]>, score: Ref<number>) {
     
     logger.value = [ ];
     logger.value.push('... Next step ...');
@@ -38,6 +38,7 @@ export function dijstraNextStep(pointsArray: Ref<Point[]>, currentPoint: Point, 
     // Mark current point as done
     if(nextPoint) {
         logger.value.push('<span style="color: green">Best distance is ' + bestDistance + ' between ' + currentPoint.name + ' and ' + (nextPoint as Point).name + '</span>');
+        score.value += bestDistance || 0;
         renderLine(linesArray, currentPoint, nextPoint);
         return nextPoint;
     } else {
@@ -58,6 +59,6 @@ export function renderLine(linesRef: Ref<Line[]>, firstPoint: Point, secondPoint
  * @param point2 
  * @returns 
  */
-function distanceBetweenPoints(point1: Point, point2: Point) {
+export function distanceBetweenPoints(point1: Point, point2: Point) {
     return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2))
 }

@@ -5,8 +5,6 @@ import { Ref } from 'vue';
 
 export default function renderDiagram(width: number = 100, height: number = 100, pointsArray: Point[], linesArray: Line[], nodeSelector: string) {
 
-    console.log('Starting renderDiagram...')
-
     if(!nodeSelector)
         return console.error('renderDiagram: nodeSelector is not provided');
 

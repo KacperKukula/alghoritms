@@ -16,5 +16,5 @@ module.exports = defineConfig({
     },
   },
 
-  publicPath: '/'
+  publicPath: '/',
 })
